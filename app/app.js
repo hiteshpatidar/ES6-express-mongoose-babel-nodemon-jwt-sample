@@ -6,8 +6,9 @@ import morgan from "morgan";
 
 //page refrences
 import errorHandler from "../app/config/error-handler"
-import dbConfig  from "../app/config/db.config";
+import dbConfig from "./config/dbConfig";
 import routes from '../app/routes/index';
+import jwt from "../app/config/jwt";
 
 const app = express();
 
@@ -29,7 +30,10 @@ mongoose
     process.exit();
   });
 
-  //registering cors
+// use JWT auth to secure the api
+app.use(jwt());
+
+//registering cors
 app.use(cors());
 
 app.use(morgan("dev")); // configire morgan

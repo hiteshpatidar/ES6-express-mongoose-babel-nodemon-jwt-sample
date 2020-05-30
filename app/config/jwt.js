@@ -1,16 +1,16 @@
-const expressJwt = require('express-jwt');
-const userService = require('../service/user.service');
-const dbConfig = require("../config/db.config.js");
+import expressJwt from 'express-jwt';
+import userService  from '../service/userService';
+import  dbConfig  from "./dbConfig.js";
 
-module.exports = jwt;
+export default jwt;
 
 function jwt() {
     const secret = dbConfig.secret;
     return expressJwt({ secret, isRevoked }).unless({
         path: [
             // public routes that don't require authentication
-            '/users/authenticate',
-            '/users/register'
+            '/authenticate'
+            // '/api/users'
         ]
     });
 }
