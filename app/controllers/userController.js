@@ -1,12 +1,22 @@
-import mongoose from 'mongoose'; 
-import user from '../models/userModel';
+import userService  from "../service/userService";
+import { Router } from "express";
 
-exports.getAll = (req, res) => {
-    user.find({}, (err, users) => {
-        if (err) {
-            res.send(err);
-        }
+const router = Router();
 
-        res.json(users);
-    });
-};
+//routes
+router.get("/", getAll);
+router.get('/:id', getById);
+
+export default router;
+
+function getAll(req, res) {
+    userService.getAll()
+    .then(users => res.json(users))
+    .catch(err => next(err));
+}
+
+function getById(req, res) {
+    userService.getById(req.params.id)
+    .then(user => user ? res.json(user) : res.sendStatus(404))
+    .catch(err => next(err));
+}
