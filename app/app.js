@@ -1,14 +1,14 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
-import cors from "cors";
-import morgan from "morgan";
+import cors from 'cors';
+import morgan from 'morgan';
 
-//page refrences
-import errorHandler from "../app/config/error-handler"
-import dbConfig from "./config/dbConfig";
-import routes from '../app/routes/index';
-import jwt from "../app/config/jwt";
+// page refrences
+import errorHandler from './config/error-handler';
+import dbConfig from './config/dbConfig';
+import routes from './routes/index';
+import jwt from './config/jwt';
 
 const app = express();
 
@@ -23,20 +23,20 @@ mongoose
     useCreateIndex: true
   })
   .then(() => {
-    console.log("Connected to the database!");
+    console.log('Connected to the database!');
   })
-  .catch(err => {
-    console.log("Cannot connect to the datbase!", err);
+  .catch((err) => {
+    console.log('Cannot connect to the datbase!', err);
     process.exit();
   });
 
 // use JWT auth to secure the api
 app.use(jwt());
 
-//registering cors
+// registering cors
 app.use(cors());
 
-app.use(morgan("dev")); // configire morgan
+app.use(morgan('dev')); // configire morgan
 
 /**
     * Middleware
