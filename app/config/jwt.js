@@ -3,7 +3,7 @@ import userService from '../service/userService';
 import dbConfig from './dbConfig';
 
 async function isRevoked(req, payload, done) {
-  const user = await userService.getById(payload.sub);
+  const user = await userService.getUser(payload.sub);
 
   // revoke token if user no longer exists
   if (!user) {
